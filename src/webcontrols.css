@@ -1,0 +1,113 @@
+/* The webcontrol.js CSS style / sheet. */
+
+body {
+  width: 800px;
+  height: fit-content;
+  margin: 5px auto;
+  border: solid;
+  border-radius: 5px;
+  font-family: arial;
+  color: black;
+}
+
+h1 {
+  margin: 5px auto;
+  padding: 5px;
+  width: fit-content;
+  width: -moz-fit-content;
+}
+
+label {
+  min-width: 120px;
+  height: 30px;
+  font-weight: bold;
+  font-size: 20;
+  vertical-align: middle;
+  margin: 5px;
+}
+
+button,
+.button {
+  min-width: 120px;
+  height: 30px;
+  font-weight: bold;
+  font-size: 20;
+  vertical-align: middle;
+  border: solid;
+  border-radius: 5px;
+  margin: 5px;
+}
+
+button:hover {
+  color: white;
+  background-color: black !important;
+}
+
+.button-bar {
+  width: 95%;
+  min-height: 30px;
+  border-radius: 10px;
+  margin: 5px auto;
+  padding: 5px;
+  background-color: lightgray;
+}
+
+.console {
+  width: 95%;
+  height: 200px;
+  margin: 5px auto;
+  text-align: left;
+  font-size: 16;
+  padding: 5px;
+  overflow-y: scroll;
+  background-color: whitesmoke;
+  border: solid 1px;
+}
+
+.range {
+  width: auto;
+  height: 30px;
+  display: inline-block;
+  font-weight: bold;
+  padding: 0px;
+  font-size: 20;
+  border: solid;
+  border-radius: 5px;
+  margin: 5px;
+}
+
+input[type=range] {
+  -webkit-appearance: none;
+  height: 5px;
+  vertical-align: middle;
+  outline: none;
+  background: black;
+  opacity: 0.3;
+}
+
+input[type=range]:hover {
+  opacity: 1;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  border-radius: 10px;
+  width: 20px;
+  height: 20px;
+  background: black;
+  cursor: hand;
+}
+
+input[type=range]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background: black;
+  cursor: hand;
+}
+
+input[type=text] {
+  min-height: 30px;
+  text-align: right;
+  font-size: 18px;
+}
