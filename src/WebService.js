@@ -11,7 +11,6 @@ const Queue = require('Queue');
  * - This service:
  *   - is not to be used to render a whole web site, the [http-server](https://www.npmjs.com/package/http-server) is to be used instead;
  *   - is as closed as possible to the Arduino/ESP32 adnai-esp32 API, to simplify code development.
- * @param {uint} [port=8080] The port to listen.
  * @param {uint} [overflow=1024] The maximal number of simultaneous requests, bounded to avoid deny-of-service attacks.
  * @class
  */
@@ -19,14 +18,14 @@ class WebService {
   let app = express();
   let queue = new Queue();
   let port;
-  constructor(port = 8080, overflow = 1024) {
+  constructor(overflow = 1024) {
     this.port = port;
     app.use(express.urlencoded({ extended: true }));
     queue.setMaximalSize(overflow);
   }
   /** Attachs a handler to a web service route.
    * @param {string} route The path defining the service, e.g., "/action".
-   * - It accepts GET or POST requests.
+   * - It accepts both GET or POST requests.
    * @param {callback} handler. A parameter less method implementing the service.
    * - It uses the `get(name)` method to get argument's value.
    * - The handler MUST conclude with a call to the `answer(ok, message)` function in order to send the response message.
@@ -74,9 +73,10 @@ class WebService {
    }
   /** Begins the service, after all handles are defined.
    * - The service stops at the end of the program execution.
+   * @param {uint} [port=8080] The port to listen.
    */
-  begin() {
-    app.listen(this.port);
+  begin(port = 8080) {
+    app.listen(port);
   }
   /** Gets the handler request for derived services.
    * @return The [request](https://expressjs.com/en/5x/api/request).

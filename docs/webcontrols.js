@@ -5,6 +5,7 @@
  * <html>
  *  <head>
  *    <script type='text/javascript' src='https://vthierry.github.io/idnai-web/webcontrols.js'></script>
+ *    <script type='text/javascript' src='https://vthierry.github.io/idnai-web/fetchService.js'></script>
  *    <link rel='stylesheet' href='https://vthierry.github.io/idnai-web/webcontrols.css'/> <!-- … or any other style sheet -->
  *  </head>
  *  <body style='width:800px'>

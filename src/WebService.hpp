@@ -16,18 +16,18 @@ class WebService {
   } query;
   std::queue<query*> queue;
   std::map<std::string, void (*)(void)> handlers;
-  unsigned int port, overflow;
+  unsigned int overflow;
   void handlerPrologue(const httplib::Request &req, httplib::Response &res);
   static std::string now();
 public:
-  WebServer(port = 8080, overflow = 1024): port(port), overflow(overflow){}
+  WebServer(overflow = 1024): overflow(overflow){}
   void on(String route, void (*handler)(void));
   std::string get(name) {
     return name in queue.front().request.has_param(name) ? queue.front().request.get_param_value(name) : name == "now" ? now() : "";
   }
   void answer(bool ok, String message);
-  void begin() {
-    svr.listen("0.0.0.0", post);
+  void begin(port = 8080) {
+    svr.listen("0.0.0.0", port);
   }
 };
 

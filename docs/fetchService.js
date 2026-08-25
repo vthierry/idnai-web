@@ -1,12 +1,16 @@
 
 /** Implements a web service query.
- * - In C/C++ or JavaScript/nodejs the function is synchronous, while in a Web page context, it has asynchronous, requiring a handler.
+ * - In C/C++ or JavaScript/nodejs or Python the function is synchronous, returning the response content, thus without a handler.
+ * - In a JavaScript/Webpage context, it is asynchronous, requiring a handler, and not providing a response en return.
  * @param {string} url The URL to query.
  * @param {Value} [parameters] The `{ name: value, … }` parameters.
  * - It uses a "POST" method if parameters is defined and not empty.
  * - It uses a "GET" method otherwise.
- * @param {callback} handler In asynchronous mode, i.e., in a Web page context, a `handler(string body)` has to be defined.
- * @return {string} The response content, either a JSON string, or a HTML page, or textual message.
+ * @param {callback} handler In a Web page context, a `handler(string response_content)` has to be defined.
+ * @return {string} The response content, either a JSON string, or a HTML page, or textual message, if synchrobeous, else nothing.
+ *  - JSON string starts with '{'.
+ *  - HTML page  starts with '<'.
+ *  - Other textual messages do not, by contract, starts with '{' or '<'.
  * @throws {error} If the query fails.
  */
 function fetchService(url, parameters = null, callback)

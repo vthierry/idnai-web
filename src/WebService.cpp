@@ -1,7 +1,9 @@
 #include "WebServer.hpp"
+#include "std.hpp"
 
 void WebServer::handlerPrologue(const httplib::Request &req, httplib::Response &res) {
   queue.push(new query(handlers.at(req.matched_route), req, res));
+  alert(queue.size() > overflow, "illegal-state", "in WebServer::handle: too many request at the same time, a deny-of-service attack?");
   if (queue.size() == 1) {
     queue.front().handler();
   }
