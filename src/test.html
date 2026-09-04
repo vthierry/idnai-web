@@ -1,0 +1,31 @@
+<html>
+  <head>
+    <script type='text/javascript' src='https://vthierry.github.io/idnai-web/webcontrols.js'></script>
+    <script type='text/javascript' src='https://vthierry.github.io/idnai-web/fetchService.js'></script>
+    <link rel='stylesheet' href='https://vthierry.github.io/idnai-web/webcontrols.css'/>
+  <body>
+    <h1>idnai-web test</h1>
+    <div class='button-bar'><script>
+	addButton("start", {}, () => {
+	  fetchService("http://localhost:8080/post");
+	});
+    </script></div>
+    <table>
+      <tr><th>Language</th><th style='with:300px'>Now</th><th style='with:200px'>Count</th></tr>
+      <tr><td>JavaScript</td><td id='js-now'></td><td id='js-count'></td></tr>
+      <tr><td>C/C++</td><td id='cc-now'></td><td id='cc-count'></td></tr>
+      <tr><td>Python</td><td id='py-now'></td><td id='py-count'></td></tr>
+    </table>
+    <script>
+      setInterval(() => {
+	fetchService("http://localhost:8080/now", null, (response) => { document.getElementByID("js-now").innerHTML = response; });
+	fetchService("http://localhost:8081/now", null, (response) => { document.getElementByID("cc-now").innerHTML = response; });
+	fetchService("http://localhost:8082/now", null, (response) => { document.getElementByID("py-now").innerHTML = response; });
+ 	fetchService("http://localhost:8080/get", null, (response) => { document.getElementByID("js-count").innerHTML = response; });
+	fetchService("http://localhost:8081/get", null, (response) => { document.getElementByID("cc-count").innerHTML = response; });
+	fetchService("http://localhost:8082/get", null, (response) => { document.getElementByID("py-count").innerHTML = response; });
+      }, 1000);
+   </script>
+  </body>
+</html>
+  

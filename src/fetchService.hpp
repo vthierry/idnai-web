@@ -1,5 +1,5 @@
-#ifndef __aidesys_fetchService__
-#define __aidesys_fetchService__
+#ifndef __idnai_fetchService__
+#define __idnai_fetchService__
 
 std::string fetchService(String url, const Value& parameters);
 

@@ -39,10 +39,12 @@ const webcontrols = {
    */
   addButton: function(id, options = {}, callback = function() {}) {
     options = Object.assign({
-      text: "GO",
-      color: "blue",
+      text: id,
+      color: "lightgray",
     }, options);
-    document.write("<button id='" + id + "' style='" + options.style + "'></button>");
+    document.write("<button id='" + id + "' style='" + options.style + "'>"+options.text+"</button>");
+    let button = document.getElementById(id);
+    button.style.backgroundColor = options.color;
     button.addEventListener("click", function(event) {
       callback();
     });

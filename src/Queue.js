@@ -22,7 +22,7 @@ Queue = {
   setMaximalSize(size = 0) {
     this.max_size = size;
   },
-  /** Adds (enqueues) a data to queue rear.
+  /** Adds (enqueues) a data to the queue rear.
    * @param data The data to add.
    * @return This Queue.
    */
@@ -39,6 +39,7 @@ Queue = {
       throw new Error("Queue overflow, size > " + this.max_size);
     else 
       this.size++;
+    setTimeout(this.handle());
     return this;
   },
   /** Peeks the data at the front, without removing it.
@@ -47,7 +48,7 @@ Queue = {
   front: function() {
     return this.front == null ? null : this.front.data;
   },
-  /** Peeks and dequeues the data at the front, thus removing it.
+  /** Peeks (dequeues) the data at the front, thus removing it.
    * @return The data at the front.
    */
   pop: function() {
@@ -63,6 +64,30 @@ Queue = {
       return d;
     }
   },
+  /** Defines a handler treating queue input.
+   * - The handler handles the front data and return when done.
+   * - The front data is removed at the end of its handling.
+   * - Hndling is done in parrallel to all queue operations, thus never blocked.
+   * @param {callback} handler A `handler(data)` called for each queued data.
+   * - With the `null` value it stops handling the queue data.
+   */
+  def: function(handler) {
+    this.handler = handler;
+  },
+  /** Checks if the handler is active.
+   * @return {bool} True if the front data is currently handled by the handler, else false.
+   */
+  isHandling : function() {
+    return this.ing;
+  },
+  handler = null;
+  handle: function() {
+    if (this.handler != null && this.size > 0) {
+      this.handler(this.front);
+      this.pop();
+      setTimeout(this.handle);
+    }
+  }
   /** Returns the present queue as an array.
    * @return An array with the front data first and the rear data at last.
    */
@@ -73,7 +98,7 @@ Queue = {
     return datas;
   },
   // Internal references, do not use.
-  front: null, rear: null, size: 0, max_size = 0
+  front: null, rear: null, size: 0, max_size = 0;
 };
 
 module.exports = Queue;
